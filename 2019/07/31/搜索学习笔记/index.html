@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="一段时间的搜索学习后也算有了一点心得和体会，在这里稍微整理一下自己的A*算法。" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>搜索学习笔记 | Trifoliate-Orange</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一段时间的搜索学习后也算有了一点心得和体会，在这里稍微整理一下自己的A*算法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搜索学习笔记">
+<meta property="og:url" content="Trifoliate-Orange.github.io/2019/07/31/搜索学习笔记/index.html">
+<meta property="og:site_name" content="Trifoliate-Orange">
+<meta property="og:description" content="一段时间的搜索学习后也算有了一点心得和体会，在这里稍微整理一下自己的A*算法。">
+<meta property="og:image" content="https://i.loli.net/2019/08/01/5d425a7c7398a44526.png">
+<meta property="og:updated_time" content="2019-08-01T03:21:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="搜索学习笔记">
+<meta name="twitter:description" content="一段时间的搜索学习后也算有了一点心得和体会，在这里稍微整理一下自己的A*算法。">
+<meta name="twitter:image" content="https://i.loli.net/2019/08/01/5d425a7c7398a44526.png">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Trifoliate-Orange" rel="home">Trifoliate-Orange</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">枳花明于驿墙，风动而见幽香。</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-搜索学习笔记" class="post-搜索学习笔记 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      搜索学习笔记
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="Trifoliate-Orange.github.io/2019/07/31/搜索学习笔记/" data-id="cjys6ix3e000094lapwcielx0" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <blockquote>
+<p>一段时间的搜索学习后也算有了一点心得和体会，在这里稍微整理一下自己的A*算法。</p>
+</blockquote>
+<a id="more"></a> 
+<h1 id="A-算法"><a href="#A-算法" class="headerlink" title="A*算法"></a>A*算法</h1><h2 id="概念理解"><a href="#概念理解" class="headerlink" title="概念理解"></a>概念理解</h2><p>使用BFS时，我们会扩展当前状态能到达的所有状态存储到队列里去，然后弹出当前状态，再继续进行下一个状态的搜索。这样做好处有坏处也有。好处就是第一个搜到的一定是最优解（至少是状态转移次数最少的解），坏处就是状态太多，搜索太慢。</p>
+<p>在搜索时，我们经常会发现有些状态比其他状态“更有可能到达目标状态”，而有些状态“更不可能到达目标状态”。（比如走迷宫，终点在右下角，而你却在向左上角走）</p>
+<p>事实上，那些“更不可能到达目标状态”的状态，最终搜索出正解的概率是很低的。因此我们应当优先扩展那些“更可能到达目标状态”的状态。</p>
+<p><strong>那么问题来了，我们如何量化这个“到达的可能性”呢？</strong></p>
+<p>A*算法其实就是给每个状态一个“可能性分值”f(x)。给每个状态对于剩余花费的乐观估计h(x)。定义g(x)为当前花费，h(x)为估价，那么一个状态的分值即为 <strong>f(x)=h(x)+g(x)。</strong></p>
+<p>平常的BFS，使用的是队列来存储状态。在A*算法里我们则采用优先队列来对状态进行存储。优先队列比较什么？<strong>当然比较的是状态的分值</strong>。分值越低，那么也就是离目标状态越近，也就越优先搜索。</p>
+<p>需要注意的是，我们的h(x)估价函数是对于剩余情况的<strong>乐观估计</strong>，也就是说，我们估计剩余的代价不能比真正剩余代价要大。<strong>假如估计的代价比真正的代价要大，那就有可能搜不到最优解</strong>。估价函数h(x)不是乐观估计的A*算法就是A算法。</p>
+<p><strong>事实上，A*算法就是比通常BFS多了一个估价函数而已。h(x)函数的构造是整个A*算法的关键。可以说，如果不多多练习A*算法，养成构造h(x)函数的能力，那么A*算法就学废了。</strong></p>
+<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><p><a href="https://www.luogu.org/problem/P1379" target="_blank" rel="external">【例题】八数码难题（Luogu P1379）</a></p>
+<p><strong>题目描述</strong><br>在3×3的棋盘上，摆有八个棋子，每个棋子上标有1至8的某一数字。棋盘中留有一个空格，空格用0来表示。空格周围的棋子可以移到空格中。要求解的问题是：给出一种初始布局（初始状态）和目标布局（为了使题目简单,设目标状态为123804765），找到一种最少步骤的移动方法，实现从初始布局到目标布局的转变。</p>
+<p><strong>输入格式</strong><br>输入初始状态，一行九个数字，空格用0表示</p>
+<p><strong>输出格式</strong><br>只有一行，该行只有一个数字，表示从初始状态到目标状态需要的最少移动次数(测试数据中无特殊无法到达目标状态数据)</p>
+<p><strong>输入样例</strong><br>283104765</p>
+<p><strong>输出</strong></p>
+<p><strong>分析：</strong><br>此题普通BFS也可水过，但效率太低。考虑优化。<br>大致有这么几个优化方向：</p>
+<ol>
+<li>双向BFS<br>首尾状态已知，显然可以双向BFS。优化效果很明显。</li>
+<li>A*算法<br>这里要想的是构造h(x)函数。考虑一个最简单的：h(x)=当前不在应在位置上的数字数。容易想到，一次只能移动一个，因此剩余总步数一定大于h(x)，显然是乐观估计。优化效果同样很好。</li>
+</ol>
+<p><del>当然如果是双向A*我觉得可以更猛，但是好不好写就不一定了。</del></p>
+<p><strong>代码</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div></pre></td><td class="code"><pre><div class="line">//By 枳椛明驿墙</div><div class="line">#include&lt;bits/stdc++.h&gt;</div><div class="line">using namespace std;</div><div class="line"></div><div class="line">int fx[4]=&#123;1,-1,0,0&#125;;</div><div class="line">int fy[4]=&#123;0,0,1,-1&#125;;</div><div class="line">int goal[3][3]=</div><div class="line">&#123;</div><div class="line">&#123;1,2,3&#125;,</div><div class="line">&#123;8,0,4&#125;,</div><div class="line">&#123;7,6,5&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">struct node</div><div class="line">&#123;</div><div class="line">	int h,g;</div><div class="line">	long long val;</div><div class="line">&#125;;</div><div class="line">bool operator &gt;(node a,node b)&#123;return a.h+a.g&gt;b.h+b.g;&#125;</div><div class="line">bool operator &lt;(node a,node b)&#123;return a.h+a.g&lt;b.h+b.g;&#125;</div><div class="line"></div><div class="line">int z[3][3];</div><div class="line">priority_queue&lt;node,vector&lt;node&gt;,greater&lt;node&gt; &gt;q;</div><div class="line">map&lt;long long,bool&gt;Hash;</div><div class="line"></div><div class="line">void getmap(long long x)</div><div class="line">&#123;</div><div class="line">	long long f=x;</div><div class="line">	for(int i=2;i&gt;=0;i--)</div><div class="line">	&#123;</div><div class="line">		for(int j=2;j&gt;=0;j--)</div><div class="line">		&#123;</div><div class="line">			z[i][j]=f%10;</div><div class="line">			f=f/10;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">long long getid()</div><div class="line">&#123;</div><div class="line">	long long f=1,res=0;</div><div class="line">	for(int i=2;i&gt;=0;i--)</div><div class="line">	&#123;</div><div class="line">		for(int j=2;j&gt;=0;j--)</div><div class="line">		&#123;</div><div class="line">			res+=z[i][j]*f;</div><div class="line">			f=f*10;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	return res;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int getrest(long long x)</div><div class="line">&#123;</div><div class="line">	int cnt=0;</div><div class="line">	getmap(x);</div><div class="line">	for(int i=0;i&lt;3;i++)</div><div class="line">		for(int j=0;j&lt;3;j++)</div><div class="line">			if (z[i][j]!=goal[i][j]&amp;&amp;z[i][j]!=0) cnt++;</div><div class="line">	return cnt;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void bfs()</div><div class="line">&#123;</div><div class="line">	node tmp;</div><div class="line">	while(!q.empty())</div><div class="line">	&#123;</div><div class="line">		tmp=q.top();</div><div class="line">		if (tmp.val==123804765) break;</div><div class="line">		getmap(tmp.val);</div><div class="line">		int zx=0;int zy=0;</div><div class="line">		while(1)</div><div class="line">		&#123;</div><div class="line">			bool flag=false;</div><div class="line">			for(int i=0;i&lt;3;i++) if (z[zx][i]==0) &#123;zy=i;flag=true;break;&#125;</div><div class="line">			if (flag) break;</div><div class="line">			zx++;</div><div class="line">		&#125;</div><div class="line">		for(int i=0;i&lt;4;i++)</div><div class="line">		&#123;</div><div class="line">			if (zx+fx[i]&gt;=0&amp;&amp;zx+fx[i]&lt;=2&amp;&amp;zy+fy[i]&gt;=0&amp;&amp;zy+fy[i]&lt;=2)</div><div class="line">			&#123;</div><div class="line">				swap(z[zx+fx[i]][zy+fy[i]],z[zx][zy]);//将0和其他交换</div><div class="line">				node f;f.val=getid();</div><div class="line">				if (!Hash[f.val]) &#123;f.g=tmp.g+1;f.h=getrest(f.val);q.push(f);Hash[f.val]=true;&#125;</div><div class="line">				getmap(tmp.val);//还原</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		q.pop();</div><div class="line">	&#125;</div><div class="line">	cout&lt;&lt;tmp.g;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	node s;</div><div class="line">	ios::sync_with_stdio(false);</div><div class="line">	cin&gt;&gt;s.val;s.g=0;s.h=getrest(s.val);</div><div class="line">	Hash[s.val]=true;</div><div class="line">	q.push(s);</div><div class="line">	bfs();</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>写出普通算法还是不难的，限于篇幅，这里不在展示。可以看到比上普通bfs，A*就是多了一个估价函数而已。但优化效果是非常明显的。</p>
+<p><img src="https://i.loli.net/2019/08/01/5d425a7c7398a44526.png" alt="优化了将近六倍！"></p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2019/07/31/搜索学习笔记/">
+    <time datetime="2019-07-31T14:30:59.000Z" class="entry-date">
+        2019-07-31
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2019/07/31/hello-world/" rel="next">Hello World <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2019/07/31/搜索学习笔记/">搜索学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/31/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2019 Trifoliate-Orange
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/js/share.js'];</script>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>
