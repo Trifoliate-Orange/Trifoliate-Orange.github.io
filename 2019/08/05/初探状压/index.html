@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   
   
-  <meta name="description" content="����ѧ�˸�״ѹDP����ǰ�����������ܸߴ�����ʵ����Ҳ���úܸߴ��������˼���֮��������·�����еġ�" />
+  <meta name="description" content="今天学了个状压DP。以前觉得这玩意很高大上其实现在也觉得很高大上，做了几题之后发现套路还是有的。" />
   
 
   
@@ -13,18 +13,18 @@
   
   
   
-  <title>��̽״ѹ | Trifoliate-Orange</title>
+  <title>初探状压 | Trifoliate-Orange</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="����ѧ�˸�״ѹDP����ǰ�����������ܸߴ�����ʵ����Ҳ���úܸߴ��������˼���֮��������·�����еġ�">
+  <meta name="description" content="今天学了个状压DP。以前觉得这玩意很高大上其实现在也觉得很高大上，做了几题之后发现套路还是有的。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="��̽״ѹ">
+<meta property="og:title" content="初探状压">
 <meta property="og:url" content="Trifoliate-Orange.github.io/2019/08/05/初探状压/index.html">
 <meta property="og:site_name" content="Trifoliate-Orange">
-<meta property="og:description" content="����ѧ�˸�״ѹDP����ǰ�����������ܸߴ�����ʵ����Ҳ���úܸߴ��������˼���֮��������·�����еġ�">
-<meta property="og:updated_time" content="2019-08-05T02:08:58.000Z">
+<meta property="og:description" content="今天学了个状压DP。以前觉得这玩意很高大上其实现在也觉得很高大上，做了几题之后发现套路还是有的。">
+<meta property="og:updated_time" content="2019-08-05T02:12:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="��̽״ѹ">
-<meta name="twitter:description" content="����ѧ�˸�״ѹDP����ǰ�����������ܸߴ�����ʵ����Ҳ���úܸߴ��������˼���֮��������·�����еġ�">
+<meta name="twitter:title" content="初探状压">
+<meta name="twitter:description" content="今天学了个状压DP。以前觉得这玩意很高大上其实现在也觉得很高大上，做了几题之后发现套路还是有的。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -74,7 +74,7 @@
         
   
     <h1 class="entry-title article-title">
-      ��̽״ѹ
+      初探状压
     </h1>
   
 
@@ -87,31 +87,31 @@
 
     <div class="entry-content">
       
-        <p>����ѧ�˸�״ѹDP����ǰ�����������ܸߴ���<del>��ʵ����Ҳ���úܸߴ���</del>�����˼���֮��������·�����еġ�</p>
+        <p>今天学了个状压DP。以前觉得这玩意很高大上<del>其实现在也觉得很高大上</del>，做了几题之后发现套路还是有的。</p>
 <a id="more"></a>
-<h2 id="����"><a href="#����" class="headerlink" title="����"></a>����</h2><p>��ν״ѹ��������ʲô�����ļ��ɡ�<strong>��ֻ�ǰ�һ��״̬��һ������������ʾ�������ѡ�</strong></p>
-<p>���磺��һ��n*n�������Ϸ����ӣ�Ҫ������֮�䲻���й����ߣ����ж����ַ�����</p>
-<p>��Ȼ���۷����϶����еģ���������233�����������������۵��Ƕ�̬�滮��������</p>
-<p>��f[n][1/0][1/0]����[1/0]Ϊ�ŵ���n�У���i�����ӷ�/�������ӡ�����������ȷ����˵��û�����ģ��������������⣺</p>
+<h2 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h2><p>所谓状压，并不是什么特殊的技巧。<strong>它只是把一个状态用一个二进制数表示出来而已。</strong></p>
+<p>比如：在一个n*n的棋盘上放棋子，要求格子之间不能有公共边，求有多少种方案。</p>
+<p>当然数论方法肯定是有的（组合数？233）但是我们这里讨论的是动态规划的做法。</p>
+<p>设f[n][1/0][1/0]……[1/0]为放到第n行，第i个格子放/不放棋子。这样做从正确性来说是没问题的，但是有两个问题：</p>
 <ol>
-<li>����д�����ܶ��ġ�</li>
-<li>�ռ䡣</li>
+<li>编程写起来很恶心。</li>
+<li>空间。</li>
 </ol>
-<p>��ô�Ľ��أ����Ƿ��֣���ʵ�ӵڶ�ά��ʼ�������Ķ�ֻ������״̬��1��0����ô��ʵһ��01���Ϳ��Ը���������Щ���߰����Ķ����ˡ�01����ʲô��ʾ���ܲ������ַ��������ӶȰ���������գ�����ѡ��ʹ��<strong>��������</strong>��</p>
-<p>����5����ʮ��������ת���ɶ����ƾ���101���Ϳ��Ա�ʾ��һ�͵��������ӷ��ˣ��ڶ�������û�š�</p>
-<p>ѡ�ö���������ʲô�ô���</p>
+<p>怎么改进呢？我们发现，其实从第二维开始，后面的都只有两个状态：1和0。那么其实一个01串就可以概括后面那些乱七八糟的东西了。01串用什么表示？总不能是字符串，复杂度摆在那里。最终，我们选择使用<strong>二进制数</strong>。</p>
+<p>比如5这个十进制数，转化成二进制就是101，就可以表示第一和第三个格子放了，第二个格子没放。</p>
+<p>选用二进制数有什么好处？</p>
 <ol>
-<li>ö�ٷ���</li>
-<li>�������Ӷȵͣ�λ���㼴�ɣ�</li>
+<li>枚举方便</li>
+<li>操作复杂度低（位运算即可）</li>
 </ol>
-<p>���ǵ�ÿ�����Ӷ��зźͲ�������״̬����ô����$2^n$��״̬����λ��������ʾ����$1&lt;&lt;n$��ô����״̬��<strong>����һ���ֲܿ��ĸ��Ӷȣ�����һ����˵��״ѹ����Ŀ���������Ե����ݷ�Χ��</strong>һ����˵��������n�����ᳬ��20�����Կ���״ѹ�ǱȽϼ򵥵ģ���ʵ�ص㻹���ڶ�̬�滮��״ѹֻ���ֶζ��ѡ�</p>
-<h2 id="����-1"><a href="#����-1" class="headerlink" title="����"></a>����</h2><p><a href="https://www.luogu.org/problem/P1896" target="_blank" rel="external">�����⡿Luogu P1896�����ַ�King</a></p>
-<p>�����Ͳ�ճ�������ˣ����Ͼ��������⡣</p>
-<p>��ĿҪ���������ַ������Ĺ�����Χ����һ���Ź�����Ҳ����˵����һ�зŵ����Ӻ���һ�е����Ӳ�����ͬһ���Ź����</p>
-<p>���������ж���һ���Ź�����û��ͬʱ������</p>
-<p>�赱ǰ�з���״̬Ϊi����һ�з���״̬Ϊj����ô����i&amp;j������0����˵��i��j��ͬһ�������غϡ�һ���ĵ�����i&lt;<1��i>&gt;1��ֵҲӦ���������ǵĿ��Ƿ�Χ��</1��i></p>
-<p>����ʵ�����������ĺ��ġ�</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> debug printf(<span class="meta-string">"Trifoliate-Flower\n"</span>);</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">10</span>;</div><div class="line"><span class="keyword">long</span> <span class="keyword">long</span> f[N][(<span class="number">1</span>&lt;&lt;<span class="number">9</span>)<span class="number">-1</span>][<span class="number">82</span>];</div><div class="line"><span class="keyword">int</span> num,states=<span class="number">0</span>,n,k;</div><div class="line"><span class="keyword">int</span> st[(<span class="number">1</span>&lt;&lt;<span class="number">9</span>)<span class="number">-1</span>],c[(<span class="number">1</span>&lt;&lt;<span class="number">9</span>)<span class="number">-1</span>];</div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">count</span><span class="params">(<span class="keyword">int</span> x)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> res=<span class="number">0</span>,tmp=x;</div><div class="line">	<span class="keyword">while</span>(tmp&gt;<span class="number">0</span>)</div><div class="line">	&#123;</div><div class="line">		res=res+tmp%<span class="number">2</span>;</div><div class="line">		tmp=tmp&gt;&gt;<span class="number">1</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> res;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">memset</span>(f,<span class="number">0</span>,<span class="keyword">sizeof</span>(f));</div><div class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</div><div class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;k;</div><div class="line">	num=(<span class="number">1</span>&lt;&lt;n);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;num;i++)</div><div class="line">		<span class="keyword">if</span> (!((i&lt;&lt;<span class="number">1</span>)&amp;i)&amp;&amp;!((i&gt;&gt;<span class="number">1</span>)&amp;i))</div><div class="line">		&#123;</div><div class="line">			st[states]=i;</div><div class="line">			c[i]=count(i);</div><div class="line">			states++;</div><div class="line">		&#125;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;states;i++) <span class="keyword">if</span> (c[st[i]]&lt;=k) &#123;f[<span class="number">1</span>][st[i]][c[st[i]]]=<span class="number">1</span>;&#125;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;states;j++)<span class="comment">//��ǰ״̬Ϊst[j]</span></div><div class="line">		&#123;</div><div class="line">			<span class="keyword">if</span> (c[st[j]]&lt;=k)</div><div class="line">			&#123;</div><div class="line">			    <span class="comment">//cout&lt;&lt;st[j]&lt;&lt;" "&lt;&lt;c[st[j]]&lt;&lt;endl;</span></div><div class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> l=<span class="number">0</span>;l&lt;states;l++)<span class="comment">//����״̬Ϊst[l]</span></div><div class="line">				&#123;</div><div class="line">					<span class="keyword">if</span> (!(st[j]&amp;st[l])&amp;&amp;!((st[j]&lt;&lt;<span class="number">1</span>)&amp;st[l])&amp;&amp;!((st[j]&gt;&gt;<span class="number">1</span>)&amp;st[l]))</div><div class="line">					&#123;</div><div class="line">						<span class="keyword">for</span>(<span class="keyword">int</span> r=c[st[l]];r&lt;=k-c[st[j]];r++)<span class="comment">//ö����һ��+��һ��֮ǰһ�����˶���</span></div><div class="line">						&#123;</div><div class="line">							f[i][st[j]][r+c[st[j]]]+=f[i<span class="number">-1</span>][st[l]][r];</div><div class="line">						&#125;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">long</span> <span class="keyword">long</span> ans=<span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;states;i++) <span class="keyword">if</span> (c[st[i]]&lt;=k) ans+=f[n][st[i]][k];</div><div class="line">	<span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>考虑到每个格子都有放和不放两种状态，那么就有$2^n$种状态，用位运算来表示就是$1&lt;&lt;n$这么多种状态。<strong>这是一个很恐怖的复杂度，所以一般来说，状压的题目都有着明显的数据范围。</strong>一般来说，这种题n都不会超过20。所以看出状压是比较简单的，其实重点还是在动态规划。状压只是手段而已。</p>
+<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><p><a href="https://www.luogu.org/problem/P1896" target="_blank" rel="external">【例题】Luogu P1896互不侵犯King</a></p>
+<p>题面就不粘贴上来了，这毕竟不是题解。</p>
+<p>题目要求王互不侵犯，王的攻击范围就是一个九宫格。也就是说，下一行放的棋子和上一行的棋子不能在同一个九宫格里。</p>
+<p>考虑如何判断在一个九宫格里没有同时放王？</p>
+<p>设当前行放置状态为i，上一行放置状态为j。那么如果i&amp;j不等于0，就说明i和j在同一列里有重合。一样的道理，i&lt;<1和i>&gt;1的值也应该纳入我们的考虑范围。</1和i></p>
+<p>这其实就是这道题的核心。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> debug printf(<span class="meta-string">"Trifoliate-Flower\n"</span>);</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">10</span>;</div><div class="line"><span class="keyword">long</span> <span class="keyword">long</span> f[N][(<span class="number">1</span>&lt;&lt;<span class="number">9</span>)<span class="number">-1</span>][<span class="number">82</span>];</div><div class="line"><span class="keyword">int</span> num,states=<span class="number">0</span>,n,k;</div><div class="line"><span class="keyword">int</span> st[(<span class="number">1</span>&lt;&lt;<span class="number">9</span>)<span class="number">-1</span>],c[(<span class="number">1</span>&lt;&lt;<span class="number">9</span>)<span class="number">-1</span>];</div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">count</span><span class="params">(<span class="keyword">int</span> x)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> res=<span class="number">0</span>,tmp=x;</div><div class="line">	<span class="keyword">while</span>(tmp&gt;<span class="number">0</span>)</div><div class="line">	&#123;</div><div class="line">		res=res+tmp%<span class="number">2</span>;</div><div class="line">		tmp=tmp&gt;&gt;<span class="number">1</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> res;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">memset</span>(f,<span class="number">0</span>,<span class="keyword">sizeof</span>(f));</div><div class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</div><div class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;k;</div><div class="line">	num=(<span class="number">1</span>&lt;&lt;n);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;num;i++)</div><div class="line">		<span class="keyword">if</span> (!((i&lt;&lt;<span class="number">1</span>)&amp;i)&amp;&amp;!((i&gt;&gt;<span class="number">1</span>)&amp;i))</div><div class="line">		&#123;</div><div class="line">			st[states]=i;</div><div class="line">			c[i]=count(i);</div><div class="line">			states++;</div><div class="line">		&#125;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;states;i++) <span class="keyword">if</span> (c[st[i]]&lt;=k) &#123;f[<span class="number">1</span>][st[i]][c[st[i]]]=<span class="number">1</span>;&#125;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;states;j++)<span class="comment">//当前状态为st[j]</span></div><div class="line">		&#123;</div><div class="line">			<span class="keyword">if</span> (c[st[j]]&lt;=k)</div><div class="line">			&#123;</div><div class="line">			    <span class="comment">//cout&lt;&lt;st[j]&lt;&lt;" "&lt;&lt;c[st[j]]&lt;&lt;endl;</span></div><div class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> l=<span class="number">0</span>;l&lt;states;l++)<span class="comment">//对照状态为st[l]</span></div><div class="line">				&#123;</div><div class="line">					<span class="keyword">if</span> (!(st[j]&amp;st[l])&amp;&amp;!((st[j]&lt;&lt;<span class="number">1</span>)&amp;st[l])&amp;&amp;!((st[j]&gt;&gt;<span class="number">1</span>)&amp;st[l]))</div><div class="line">					&#123;</div><div class="line">						<span class="keyword">for</span>(<span class="keyword">int</span> r=c[st[l]];r&lt;=k-c[st[j]];r++)<span class="comment">//枚举上一行+上一行之前一共放了多少</span></div><div class="line">						&#123;</div><div class="line">							f[i][st[j]][r+c[st[j]]]+=f[i<span class="number">-1</span>][st[l]][r];</div><div class="line">						&#125;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">long</span> <span class="keyword">long</span> ans=<span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;states;i++) <span class="keyword">if</span> (c[st[i]]&lt;=k) ans+=f[n][st[i]][k];</div><div class="line">	<span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div><!-- .entry-content -->
 
@@ -124,7 +124,7 @@
     
     
   <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/״ѹDP/">״ѹDP</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/状压DP/">状压DP</a></li></ul>
 
     </footer>
 </article>
@@ -166,7 +166,7 @@
       <ul>
         
           <li>
-            <a href="/2019/08/05/初探状压/">��̽״ѹ</a>
+            <a href="/2019/08/05/初探状压/">初探状压</a>
           </li>
         
           <li>
@@ -186,7 +186,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-content">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/״ѹDP/">״ѹDP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/状压DP/">状压DP</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </aside>
 
@@ -195,7 +195,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-content tagcloud">
-      <a href="/tags/״ѹDP/" style="font-size: 10px;">״ѹDP</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a>
+      <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/状压DP/" style="font-size: 10px;">状压DP</a>
     </div>
   </aside>
 
