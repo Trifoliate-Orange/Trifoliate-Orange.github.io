@@ -50,24 +50,24 @@
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
-      copy_button: 'Copiar',
-      copy_success: 'Copiado',
-      copy_failure: 'Copiar falló'
+      copy_button: 'Kopieren',
+      copy_success: 'Kopiert',
+      copy_failure: 'Kopieren fehlgeschlagen'
     }
   };
 </script>
 
-  <meta name="description" content="�߶����⣬��΢���õ���һЩ����˼�����������Ӷκ͡�">
+  <meta name="description" content="线段树题，略微还用到了一些分治思想来求最大子段和。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="��Luogu P4513��С�׹乫԰">
+<meta property="og:title" content="【Luogu P4513】小白逛公园">
 <meta property="og:url" content="Trifoliate-Orange.github.io/2019/08/07/【Luogu P4513】小白逛公园/index.html">
 <meta property="og:site_name" content="Trifoliate-Orange">
-<meta property="og:description" content="�߶����⣬��΢���õ���һЩ����˼�����������Ӷκ͡�">
+<meta property="og:description" content="线段树题，略微还用到了一些分治思想来求最大子段和。">
 <meta property="og:image" content="https://cdn.luogu.org/upload/pic/70111.png">
-<meta property="og:updated_time" content="2019-08-07T13:41:32.000Z">
+<meta property="og:updated_time" content="2019-08-07T13:43:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="��Luogu P4513��С�׹乫԰">
-<meta name="twitter:description" content="�߶����⣬��΢���õ���һЩ����˼�����������Ӷκ͡�">
+<meta name="twitter:title" content="【Luogu P4513】小白逛公园">
+<meta name="twitter:description" content="线段树题，略微还用到了一些分治思想来求最大子段和。">
 <meta name="twitter:image" content="https://cdn.luogu.org/upload/pic/70111.png">
   <link rel="canonical" href="Trifoliate-Orange.github.io/2019/08/07/【Luogu P4513】小白逛公园/">
 
@@ -78,7 +78,7 @@
   };
 </script>
 
-  <title>��Luogu P4513��С�׹乫԰ | Trifoliate-Orange</title>
+  <title>【Luogu P4513】小白逛公园 | Trifoliate-Orange</title>
   
 
 
@@ -136,7 +136,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Cambiar a barra de navegación">
+    <button aria-label="Navigationsleiste an/ausschalten">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -156,7 +156,7 @@
       
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Inicio</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -167,7 +167,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archivo</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
     </ul>
@@ -209,7 +209,7 @@
       <header class="post-header">
 
         
-          <h1 class="post-title" itemprop="name headline">��Luogu P4513��С�׹乫԰
+          <h1 class="post-title" itemprop="name headline">【Luogu P4513】小白逛公园
 
               
             
@@ -222,14 +222,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2019-08-07 18:44:00 / Modificado por: 21:41:32" itemprop="dateCreated datePublished" datetime="2019-08-07T18:44:00+08:00">2019-08-07</time>
+              <time title="Erstellt: 2019-08-07 18:44:00 / Geändert am: 21:43:10" itemprop="dateCreated datePublished" datetime="2019-08-07T18:44:00+08:00">2019-08-07</time>
             </span>
           
             
@@ -248,22 +248,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>�߶����⣬��΢���õ���һЩ����˼�����������Ӷκ͡�<br><a id="more"></a></p>
-<p><a href="https://www.luogu.org/problem/P4513" target="_blank" rel="external">ԭ��</a></p>
-<p><strong>��������</strong>��ά��һ����$n$��Ԫ�ص����У�֧�ֵ����޸ĺͲ�ѯ���������Ӷκ͡�����$n&lt;=500000$��������$m&lt;=100000$��</p>
-<p><strong>����</strong>������Ҫ��ά�����������Ӷκ͡���̬�����������Ӷκ��������󷨣�һ�Ƕ�̬�滮�����Ƿ��Ρ�</p>
-<p>����Ҫ�ö�̬�滮�Ļ�����Ȼÿһ���޸�֮���㶼Ҫ����һ�飬�����ĸ��Ӷ����޷����ܵġ�</p>
-<p>���Ƿ��Ρ��������е�Ϊ$mid$��һ�������������Ӷκ��޷�������������</p>
+        <p>线段树题，略微还用到了一些分治思想来求最大子段和。<br><a id="more"></a></p>
+<p><a href="https://www.luogu.org/problem/P4513" target="_blank" rel="external">原题</a></p>
+<p><strong>题意简述</strong>：维护一个有$n$个元素的序列，支持单点修改和查询区间最大子段和。其中$n&lt;=500000$，操作数$m&lt;=100000$。</p>
+<p><strong>分析</strong>：本题要求维护区间最大子段和。静态的区间最大子段和有两种求法：一是动态规划，二是分治。</p>
+<p>如果要用动态规划的话，显然每一次修改之后你都要再跑一遍，这样的复杂度是无法接受的。</p>
+<p>考虑分治。设区间中点为$mid$，一个区间的最大子段和无非有三种情况：</p>
 <ol>
-<li>����mid���ߵ������Ӷκ�</li>
-<li>����mid�ұߵ������Ӷκ�</li>
-<li>����mid��������һ���֣��ұ���һ����</li>
+<li>就是mid左边的最大子段和</li>
+<li>就是mid右边的最大子段和</li>
+<li>横跨mid，左边有一部分，右边有一部分</li>
 </ol>
-<p>һ�������������ܼ򵥣���ô�����������£������뵽��$mid$Ϊ���ޣ������������ֳ������֣���ô������$mid$�������Ӷκ͡���Ϊ�����������Ҷ����������������Ӷκ͡����ϡ����������������������������Ӷκ͡���<br><img src="https://cdn.luogu.org/upload/pic/70111.png" alt="��ͼ˵��"><br><del>(С�²ۣ�sm.ms��ô���ˣ�ֻ������ĳ�ȵ�ͼ����)</del></p>
-<p>�ǳ����ԵĶ��֣��߶���ʹ�ÿ��ܡ����������Ļ��߶��������ڵ��洢����ϢҲ�͵õ��ˣ�<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">struct node</div><div class="line">&#123;</div><div class="line">    int lv;//���������������������������Ӷκ�</div><div class="line">    int rv;//���������Ҷ����������������Ӷκ�</div><div class="line">    int tot;//������֮��</div><div class="line">    int l,r,ans;//���߽磬�ұ߽磬�Լ��������ġ���.�����Ӷκ͡�</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>�ǳ����ԣ�����Ҷ�ӽ��㣬��<code>tree[p].lv=tree[p].rv=tree[p].tot=tree[p].ans</code>��</p>
-<p>��ΪֻҪ�󵥵����£����������ĸ��·ǳ��ð졣ֻ��Ҫ�ݹ鵽Ҷ�ӽ��㣬Ȼ��һ��һ�����ϴ��Ϳ����ˡ�</p>
-<p><strong>����</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line">//segtree by �ח�����ǽ</div><div class="line">#include&lt;bits/stdc++.h&gt;</div><div class="line">using namespace std;</div><div class="line">const int N=500001;</div><div class="line">struct node</div><div class="line">&#123;</div><div class="line">    int lv,rv,tot,l,r,ans;</div><div class="line">&#125;tree[N*4];</div><div class="line"></div><div class="line">int n,m;</div><div class="line"></div><div class="line">void read(int &amp;x)</div><div class="line">&#123;</div><div class="line">    int res=0,f=1;char ch;</div><div class="line">    for(;!isdigit(ch);ch=getchar()) if (ch==&apos;-&apos;) f=-1;</div><div class="line">    for(;isdigit(ch);ch=getchar()) res=res*10+(ch-&apos;0&apos;);</div><div class="line">    x=res*f;</div><div class="line">&#125;</div><div class="line">void pushup(int p)</div><div class="line">&#123;</div><div class="line">    tree[p].lv=max(tree[p&lt;&lt;1].lv,tree[p&lt;&lt;1].tot+tree[(p&lt;&lt;1)+1].lv);</div><div class="line">    tree[p].rv=max(tree[(p&lt;&lt;1)+1].rv,tree[(p&lt;&lt;1)+1].tot+tree[p&lt;&lt;1].rv);</div><div class="line">    tree[p].tot=tree[p&lt;&lt;1].tot+tree[(p&lt;&lt;1)+1].tot;</div><div class="line">    tree[p].ans=max(tree[p&lt;&lt;1].ans,max(tree[(p&lt;&lt;1)+1].ans,tree[p&lt;&lt;1].rv+tree[(p&lt;&lt;1)+1].lv));</div><div class="line">&#125;</div><div class="line">void build(int l,int r,int p)</div><div class="line">&#123;</div><div class="line">    tree[p].l=l;tree[p].r=r;</div><div class="line">    if (l==r)</div><div class="line">    &#123;</div><div class="line">    	int x;read(x);</div><div class="line">        tree[p].rv=tree[p].lv=tree[p].tot=tree[p].ans=x;</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line">    int mid=(l+r)&gt;&gt;1;</div><div class="line">    build(l,mid,p&lt;&lt;1);build(mid+1,r,(p&lt;&lt;1)+1);</div><div class="line">    pushup(p);</div><div class="line">&#125;</div><div class="line">void updata(int x,int y,int p)</div><div class="line">&#123;</div><div class="line">    if (tree[p].l==tree[p].r)</div><div class="line">    &#123;</div><div class="line">        tree[p].rv=tree[p].lv=tree[p].tot=tree[p].ans=y;</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line">    int mid=(tree[p].l+tree[p].r)&gt;&gt;1;</div><div class="line">    if (x&lt;=mid) updata(x,y,p&lt;&lt;1);</div><div class="line">    else updata(x,y,(p&lt;&lt;1)+1);</div><div class="line">    pushup(p);</div><div class="line">&#125;</div><div class="line">node query(int x,int y,int p)</div><div class="line">&#123;</div><div class="line">    if (x&lt;=tree[p].l&amp;&amp;tree[p].r&lt;=y) return tree[p];</div><div class="line">    int mid=(tree[p].l+tree[p].r)&gt;&gt;1;</div><div class="line">    if (y&lt;=mid) return query(x,y,p&lt;&lt;1);</div><div class="line">    else if (x&gt;mid) return query(x,y,(p&lt;&lt;1)+1);</div><div class="line">    else</div><div class="line">    &#123;</div><div class="line">        node t,t1=query(x,mid,(p&lt;&lt;1)),t2=query(mid+1,y,(p&lt;&lt;1)+1);</div><div class="line">        t.lv=max(t1.lv,t1.tot+t2.lv);</div><div class="line">        t.rv=max(t1.rv+t2.tot,t2.rv);</div><div class="line">        t.tot=t1.tot+t2.tot;</div><div class="line">        t.ans=max(max(t1.ans,t2.ans),t1.rv+t2.lv);</div><div class="line">        return t;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">    read(n);read(m);</div><div class="line">    build(1,n,1);</div><div class="line">    for(int i=1;i&lt;=m;i++)</div><div class="line">    &#123;</div><div class="line">        int k,x,y;</div><div class="line">        read(k);read(x);read(y);</div><div class="line">        if (k==1)</div><div class="line">        &#123;</div><div class="line">            if (x&gt;y) swap(x,y);</div><div class="line">            printf(&quot;%d\n&quot;,query(x,y,1).ans);</div><div class="line">        &#125;</div><div class="line">        if (k==2)</div><div class="line">        &#123;</div><div class="line">            updata(x,y,1);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>一二两种情况都很简单，那么第三种情况下，容易想到以$mid$为界限，将整个区间分成两部分，那么“横跨$mid$的最大子段和”即为“左区间的右端向左延伸的最大子段和”加上“右区间的左端向右延伸的最大子段和”。<br><img src="https://cdn.luogu.org/upload/pic/70111.png" alt="看图说话"><br><del>(小吐槽：sm.ms怎么挂了，只能先用某谷的图床了)</del></p>
+<p>非常明显的二分，线段树使用可能。并且这样的话线段树单个节点存储的信息也就得到了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">struct node</div><div class="line">&#123;</div><div class="line">    int lv;//本区间从左端向右延伸的最大子段和</div><div class="line">    int rv;//本区间从右端向左延伸的最大子段和</div><div class="line">    int tot;//本区间之和</div><div class="line">    int l,r,ans;//左边界，右边界，以及本区间的【真.最大子段和】</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>非常明显，对于叶子结点，有<code>tree[p].lv=tree[p].rv=tree[p].tot=tree[p].ans</code>。</p>
+<p>因为只要求单点更新，所以这里的更新非常好办。只需要递归到叶子结点，然后一层一层向上传就可以了。</p>
+<p><strong>代码</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line">//segtree by 枳椛明驿墙</div><div class="line">#include&lt;bits/stdc++.h&gt;</div><div class="line">using namespace std;</div><div class="line">const int N=500001;</div><div class="line">struct node</div><div class="line">&#123;</div><div class="line">    int lv,rv,tot,l,r,ans;</div><div class="line">&#125;tree[N*4];</div><div class="line"></div><div class="line">int n,m;</div><div class="line"></div><div class="line">void read(int &amp;x)</div><div class="line">&#123;</div><div class="line">    int res=0,f=1;char ch;</div><div class="line">    for(;!isdigit(ch);ch=getchar()) if (ch==&apos;-&apos;) f=-1;</div><div class="line">    for(;isdigit(ch);ch=getchar()) res=res*10+(ch-&apos;0&apos;);</div><div class="line">    x=res*f;</div><div class="line">&#125;</div><div class="line">void pushup(int p)</div><div class="line">&#123;</div><div class="line">    tree[p].lv=max(tree[p&lt;&lt;1].lv,tree[p&lt;&lt;1].tot+tree[(p&lt;&lt;1)+1].lv);</div><div class="line">    tree[p].rv=max(tree[(p&lt;&lt;1)+1].rv,tree[(p&lt;&lt;1)+1].tot+tree[p&lt;&lt;1].rv);</div><div class="line">    tree[p].tot=tree[p&lt;&lt;1].tot+tree[(p&lt;&lt;1)+1].tot;</div><div class="line">    tree[p].ans=max(tree[p&lt;&lt;1].ans,max(tree[(p&lt;&lt;1)+1].ans,tree[p&lt;&lt;1].rv+tree[(p&lt;&lt;1)+1].lv));</div><div class="line">&#125;</div><div class="line">void build(int l,int r,int p)</div><div class="line">&#123;</div><div class="line">    tree[p].l=l;tree[p].r=r;</div><div class="line">    if (l==r)</div><div class="line">    &#123;</div><div class="line">    	int x;read(x);</div><div class="line">        tree[p].rv=tree[p].lv=tree[p].tot=tree[p].ans=x;</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line">    int mid=(l+r)&gt;&gt;1;</div><div class="line">    build(l,mid,p&lt;&lt;1);build(mid+1,r,(p&lt;&lt;1)+1);</div><div class="line">    pushup(p);</div><div class="line">&#125;</div><div class="line">void updata(int x,int y,int p)</div><div class="line">&#123;</div><div class="line">    if (tree[p].l==tree[p].r)</div><div class="line">    &#123;</div><div class="line">        tree[p].rv=tree[p].lv=tree[p].tot=tree[p].ans=y;</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line">    int mid=(tree[p].l+tree[p].r)&gt;&gt;1;</div><div class="line">    if (x&lt;=mid) updata(x,y,p&lt;&lt;1);</div><div class="line">    else updata(x,y,(p&lt;&lt;1)+1);</div><div class="line">    pushup(p);</div><div class="line">&#125;</div><div class="line">node query(int x,int y,int p)</div><div class="line">&#123;</div><div class="line">    if (x&lt;=tree[p].l&amp;&amp;tree[p].r&lt;=y) return tree[p];</div><div class="line">    int mid=(tree[p].l+tree[p].r)&gt;&gt;1;</div><div class="line">    if (y&lt;=mid) return query(x,y,p&lt;&lt;1);</div><div class="line">    else if (x&gt;mid) return query(x,y,(p&lt;&lt;1)+1);</div><div class="line">    else</div><div class="line">    &#123;</div><div class="line">        node t,t1=query(x,mid,(p&lt;&lt;1)),t2=query(mid+1,y,(p&lt;&lt;1)+1);</div><div class="line">        t.lv=max(t1.lv,t1.tot+t2.lv);</div><div class="line">        t.rv=max(t1.rv+t2.tot,t2.rv);</div><div class="line">        t.tot=t1.tot+t2.tot;</div><div class="line">        t.ans=max(max(t1.ans,t2.ans),t1.rv+t2.lv);</div><div class="line">        return t;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">    read(n);read(m);</div><div class="line">    build(1,n,1);</div><div class="line">    for(int i=1;i&lt;=m;i++)</div><div class="line">    &#123;</div><div class="line">        int k,x,y;</div><div class="line">        read(k);read(x);read(y);</div><div class="line">        if (k==1)</div><div class="line">        &#123;</div><div class="line">            if (x&gt;y) swap(x,y);</div><div class="line">            printf(&quot;%d\n&quot;,query(x,y,1).ans);</div><div class="line">        &#125;</div><div class="line">        if (k==2)</div><div class="line">        &#123;</div><div class="line">            updata(x,y,1);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
     </div>
 
@@ -275,7 +275,7 @@
           
         
         <div class="post-tags">
-            <a href="/tags/���ݽu-����/" rel="tag"># ���ݽṹ ����</a>
+            <a href="/tags/数据结构-分治/" rel="tag"># 数据结构 分治</a>
           
         </div>
         <div class="post-nav">
@@ -332,7 +332,7 @@
           <a href="/archives/">
         
           <span class="site-state-item-count">4</span>
-          <span class="site-state-item-name">entradas</span>
+          <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
     
@@ -350,8 +350,10 @@
         
           
         
+          
+        
         <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">tags</span>
+        <span class="site-state-item-name">schlagwörter</span>
         
       </div>
     
@@ -378,9 +380,9 @@
   </span>
   <span class="author" itemprop="copyrightHolder">LGW2016B02</span>
 </div>
-  <div class="powered-by">Creado mediante <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.2.2</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.2.2</div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Tema – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+  <div class="theme-info">Design – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
 
         
 
