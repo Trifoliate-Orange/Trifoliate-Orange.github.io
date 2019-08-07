@@ -50,9 +50,9 @@
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
-      copy_button: 'Copiar',
-      copy_success: 'Copiado',
-      copy_failure: 'Copiar falló'
+      copy_button: 'Kopieren',
+      copy_success: 'Kopiert',
+      copy_failure: 'Kopieren fehlgeschlagen'
     }
   };
 </script>
@@ -63,12 +63,12 @@
 <meta property="og:url" content="Trifoliate-Orange.github.io/2019/08/07/【Luogu P4513】小白逛公园/index.html">
 <meta property="og:site_name" content="Trifoliate-Orange">
 <meta property="og:description" content="线段树题，略微还用到了一些分治思想来求最大子段和。">
-<meta property="og:image" content="https://cdn.luogu.org/upload/pic/70111.png">
-<meta property="og:updated_time" content="2019-08-07T13:44:26.000Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/07/eopTSJ.png">
+<meta property="og:updated_time" content="2019-08-07T13:49:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Luogu P4513】小白逛公园">
 <meta name="twitter:description" content="线段树题，略微还用到了一些分治思想来求最大子段和。">
-<meta name="twitter:image" content="https://cdn.luogu.org/upload/pic/70111.png">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/08/07/eopTSJ.png">
   <link rel="canonical" href="Trifoliate-Orange.github.io/2019/08/07/【Luogu P4513】小白逛公园/">
 
 
@@ -136,7 +136,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Cambiar a barra de navegación">
+    <button aria-label="Navigationsleiste an/ausschalten">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -156,7 +156,7 @@
       
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Inicio</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -167,7 +167,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archivo</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
     </ul>
@@ -222,14 +222,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2019-08-07 18:44:00 / Modificado por: 21:44:26" itemprop="dateCreated datePublished" datetime="2019-08-07T18:44:00+08:00">2019-08-07</time>
+              <time title="Erstellt: 2019-08-07 18:44:00 / Geändert am: 21:49:34" itemprop="dateCreated datePublished" datetime="2019-08-07T18:44:00+08:00">2019-08-07</time>
             </span>
           
             
@@ -259,7 +259,7 @@
 <li>就是mid右边的最大子段和</li>
 <li>横跨mid，左边有一部分，右边有一部分</li>
 </ol>
-<p>一二两种情况都很简单，那么第三种情况下，容易想到以$mid$为界限，将整个区间分成两部分，那么“横跨$mid$的最大子段和”即为“左区间的右端向左延伸的最大子段和”加上“右区间的左端向右延伸的最大子段和”。<br><img src="https://cdn.luogu.org/upload/pic/70111.png" alt="看图说话"><br><del>(小吐槽：sm.ms怎么挂了，只能先用某谷的图床了)</del></p>
+<p>一二两种情况都很简单，那么第三种情况下，容易想到以$mid$为界限，将整个区间分成两部分，那么“横跨$mid$的最大子段和”即为“左区间的右端向左延伸的最大子段和”加上“右区间的左端向右延伸的最大子段和”。<br><img src="https://s2.ax1x.com/2019/08/07/eopTSJ.png" alt="看图说话"><br><del>(小吐槽：sm.ms怎么挂了，只能先用奇奇怪怪的图床了)</del></p>
 <p>非常明显的二分，线段树使用可能。并且这样的话线段树单个节点存储的信息也就得到了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">struct node</div><div class="line">&#123;</div><div class="line">    int lv;//本区间从左端向右延伸的最大子段和</div><div class="line">    int rv;//本区间从右端向左延伸的最大子段和</div><div class="line">    int tot;//本区间之和</div><div class="line">    int l,r,ans;//左边界，右边界，以及本区间的【真.最大子段和】</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
 <p>非常明显，对于叶子结点，有<code>tree[p].lv=tree[p].rv=tree[p].tot=tree[p].ans</code>。</p>
 <p>因为只要求单点更新，所以这里的更新非常好办。只需要递归到叶子结点，然后一层一层向上传就可以了。</p>
@@ -332,7 +332,7 @@
           <a href="/archives/">
         
           <span class="site-state-item-count">4</span>
-          <span class="site-state-item-name">entradas</span>
+          <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
     
@@ -349,7 +349,7 @@
           
         
         <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">tags</span>
+        <span class="site-state-item-name">schlagwörter</span>
         
       </div>
     
@@ -376,9 +376,9 @@
   </span>
   <span class="author" itemprop="copyrightHolder">LGW2016B02</span>
 </div>
-  <div class="powered-by">Creado mediante <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.2.2</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.2.2</div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Tema – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+  <div class="theme-info">Design – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
 
         
 
